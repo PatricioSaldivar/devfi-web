@@ -2,6 +2,7 @@ import { Navbar, Nav } from "react-bootstrap";
 import styled from "styled-components";
 import Menu from "../../img/menu.png";
 import { Button } from "@chakra-ui/react";
+import { useHistory } from "react-router-dom";
 const MenuWrapper = styled.div`
   .navbar-toggler-icon {
     background-image: url(${Menu});
@@ -20,7 +21,7 @@ const NavbarComponent = () => {
         collapseOnSelect
         expand="lg"
         style={{
-          backgroundColor: "transparent",
+          background: "#0F1F47",
           zIndex: 1000,
           position: "absolute",
           paddingTop: 50,
@@ -29,7 +30,7 @@ const NavbarComponent = () => {
           width: "100%",
         }}
       >
-        <Navbar.Brand style={{ color: "white" }}>
+        <Navbar.Brand style={{ color: "white" }} href= "/">
           <img alt="logo" width="42px" height="42px" />
         </Navbar.Brand>
         <MenuWrapper>
@@ -70,10 +71,11 @@ const NavbarComponent = () => {
                 color: "white",
                 alignSelf: "center",
               }}
+              href="/login"
             >
               Iniciar sesión
             </Nav.Link>
-            <Nav.Link style={{ color: "white", alignSelf: "center" }}>
+            <Nav.Link style={{ color: "white", alignSelf: "center" }} href="/register">
               {" "}
               <Button colorScheme="blue" size="md">
                 Registrate
