@@ -4,7 +4,7 @@ import { Button } from "@chakra-ui/react";
 import Saas1 from "../img/saas1.png";
 import Saas3 from "../img/saas3.png";
 import HeaderComponent from "./components/HeaderComponent";
-import { useRef } from "react";
+import { RefObject, useRef } from "react";
 /**
  * Styled components definitions
  */
@@ -20,8 +20,8 @@ const TitleWhite = styled.h6`
   text-align: center;
 `;
 
-const TitleOrange = styled.h1`
-  color: #dd6b20;
+const TitleBlue = styled.h1`
+  color: #0f1f47;
   font-size: 2.4em;
   margin-bottom: 15px;
 `;
@@ -57,6 +57,9 @@ const DarkContainer = styled.div`
   height: 350px;
   padding: 16px;
   margin-top: 32px;
+  display: flex;
+  align-content: center;
+  flex-flow: column;
 `;
 
 const Description = styled.h2`
@@ -64,42 +67,29 @@ const Description = styled.h2`
   font-size: 1.2em;
 `;
 
-const Landing = () => {
-  const whyRef = useRef<HTMLDivElement>(null);
-  const aboutRef = useRef<HTMLDivElement>(null);
-  const howRef = useRef<HTMLDivElement>(null);
-  const contactRef = useRef<HTMLDivElement>(null);
+const WhiteBar = styled.div`
+  background-color: white;
+  height: 5px;
+  width: 120px;
+  align-self: center;
+  margin-top: 10px;
+`;
 
-  const goToRefWhy = () => {
-    if (whyRef.current) {
-      whyRef.current.scrollIntoView({
-        behavior: "smooth",
-      });
-    }
-  };
+const DarkBar = styled.div`
+  background-color: #0f1f47;
+  height: 5px;
+  width: 120px;
+  align-self: center;
+  margin-top: 10px;
+`;
 
-  const goToRefAbout = () => {
-    if (aboutRef.current) {
-      aboutRef.current.scrollIntoView({
-        behavior: "smooth",
-      });
-    }
-  };
-  const goToRefHow = () => {
-    if (howRef.current) {
-      howRef.current.scrollIntoView({
-        behavior: "smooth",
-      });
-    }
-  };
-  const goToRefContact = () => {
-    if (contactRef.current) {
-      contactRef.current.scrollIntoView({
-        behavior: "smooth",
-      });
-    }
-  };
+interface LandingProps {
+  shareRef: RefObject<HTMLDivElement>;
+  collabRef: RefObject<HTMLDivElement>;
+  objectRef: RefObject<HTMLDivElement>;
+}
 
+const Landing = (props: LandingProps) => {
   return (
     <div>
       <div
@@ -108,22 +98,24 @@ const Landing = () => {
         }}
       >
         {/* Header Component */}
-        <HeaderComponent
-          goToRefContact={goToRefContact}
-          goToRefAbout={goToRefAbout}
-        />
+        <HeaderComponent />
       </div>
-      <TitleDark
-        style={{
-          textAlign: "center",
-          marginBottom: "2em",
-          padding: 0,
-          marginTop: "2em",
-        }}
-      >
-        Comparte de manera interactiva
-        <br></br>tus proyectos
-      </TitleDark>
+      <div ref={props.shareRef}></div>
+
+      <div style={{ display: "flex", flexFlow: "column" }}>
+        <TitleDark
+          style={{
+            textAlign: "center",
+            padding: 0,
+            marginTop: "2em",
+          }}
+        >
+          Comparte de manera interactiva
+          <br></br>tus proyectos
+        </TitleDark>
+        <DarkBar />
+      </div>
+
       <Row className="test" style={{ textAlign: "center" }}>
         <Col xs={12} md={6}>
           <ImageContainer>
@@ -145,17 +137,12 @@ const Landing = () => {
           >
             Promotor
           </TitleDark>
-          <TitleOrange>Comparte tus proyectos</TitleOrange>
+          <TitleBlue>Comparte tus proyectos</TitleBlue>
           <ProductDesctiption>
             Comparte tus proyectos en la plataforma para que los usuarios puedan
             interactuar con tus publicaciones y contactarse contigo.
           </ProductDesctiption>
-          <Button
-            colorScheme="orange"
-            size="md"
-            variant="outline"
-            onClick={goToRefContact}
-          >
+          <Button colorScheme="blue" size="md" variant="outline">
             ¡Pruébalo ya!
           </Button>
         </CustomColContainer>
@@ -174,17 +161,14 @@ const Landing = () => {
           >
             Colaborador
           </TitleDark>
-          <TitleOrange>Colabora con los demas</TitleOrange>
+          <div ref={props.collabRef}></div>
+          <TitleBlue>Colabora con los demas</TitleBlue>
+
           <ProductDesctiption>
             Visualiza los diferentes proyectos publicados en Devfi para poder
             ver las diversas oportunidades donde puedas colaborar
           </ProductDesctiption>
-          <Button
-            colorScheme="orange"
-            size="md"
-            variant="outline"
-            onClick={goToRefContact}
-          >
+          <Button colorScheme="blue" size="md" variant="outline">
             ¡Pruébalo ya!
           </Button>
         </CustomColContainer>
@@ -196,11 +180,14 @@ const Landing = () => {
       </Row>
       <DarkContainer>
         <TitleWhite>Colabora y conoce personas de diversos paises</TitleWhite>
+        <WhiteBar />
       </DarkContainer>
-      <div style={{ padding: "16px" }}>
+      <div ref={props.objectRef}></div>
+      <div style={{ padding: "16px", display: "flex", flexFlow: "column" }}>
         <TitleDark style={{ textAlign: "center", padding: 0 }}>
           Nuestro objetivo
         </TitleDark>
+        <DarkBar />
         <Description
           style={{
             textAlign: "center",

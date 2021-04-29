@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Landing from "./views/Landing";
 import Login from "./views/Login";
@@ -7,9 +7,17 @@ import NavbarComponent from "./views/components/NavbarComponent";
 import FooterComponent from "./views/components/FooterComponent";
 
 export default function App() {
+  const shareRef = useRef<HTMLDivElement>(null);
+  const collabRef = useRef<HTMLDivElement>(null);
+  const objectRef = useRef<HTMLDivElement>(null);
+
   return (
     <ChakraProvider>
-      <NavbarComponent />
+      <NavbarComponent
+        shareRef={shareRef}
+        collabRef={collabRef}
+        objectRef={objectRef}
+      />
       <Router>
         <div>
           <Switch>
@@ -18,7 +26,11 @@ export default function App() {
             </Route>
             <Route path="/register"></Route>
             <Route path="/">
-              <Landing />
+              <Landing
+                shareRef={shareRef}
+                collabRef={collabRef}
+                objectRef={objectRef}
+              />
             </Route>
           </Switch>
         </div>
