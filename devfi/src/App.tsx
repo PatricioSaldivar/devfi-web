@@ -5,6 +5,7 @@ import Login from "./views/Login";
 import { ChakraProvider } from "@chakra-ui/react";
 import NavbarComponent from "./views/components/NavbarComponent";
 import FooterComponent from "./views/components/FooterComponent";
+import Register from "./views/Register";
 
 export default function App() {
   const shareRef = useRef<HTMLDivElement>(null);
@@ -22,9 +23,11 @@ export default function App() {
         <div>
           <Switch>
             <Route path="/login">
-            <Login/>
+              <Login />
             </Route>
-            <Route path="/register"></Route>
+            <Route path="/register">
+              <Register />
+            </Route>
             <Route path="/">
               <Landing
                 shareRef={shareRef}

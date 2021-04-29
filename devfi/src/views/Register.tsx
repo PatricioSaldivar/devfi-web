@@ -40,8 +40,9 @@ const TextFieldWrapper = styled(TextField)`
   }
 `;
 
-const Login = () => {
+const Register = () => {
   let history = useHistory();
+  const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
@@ -124,12 +125,29 @@ const Login = () => {
   return (
     <MuiThemeProvider theme={theme}>
       <Container>
-        <div style={{ marginTop: "2.5em" }}>
-          <h1 style={{ fontSize: "1.5em", marginBottom: "20px" }}>
-            Inicio de sesión
-          </h1>
+        <div style={{ marginTop: "4.5em" }}>
+          <h1 style={{ fontSize: "1.5em", marginBottom: "20px" }}>Registro</h1>
           <div className="login-form">
             <form id="login-form">
+              <div>
+                <TextFieldWrapper
+                  style={{
+                    marginBottom: "1em",
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                  id="outlined-basic"
+                  label="Nombre"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Nombre"
+                  variant="outlined"
+                  className={classes.root}
+                  InputLabelProps={{
+                    className: classes.floatingLabelFocusStyle,
+                  }}
+                />
+              </div>
               <div>
                 <TextFieldWrapper
                   style={{
@@ -185,13 +203,9 @@ const Login = () => {
                   }}
                   onClick={handleLogin}
                 >
-                  Iniciar sesión
+                  Registrate
                 </Button>
               </div>
-              <small>¿No tienes cuenta?</small>
-              <Button onClick={pushRegister} color="secondary">
-                Registrarse ya!
-              </Button>
             </form>
           </div>
         </div>
@@ -199,4 +213,4 @@ const Login = () => {
     </MuiThemeProvider>
   );
 };
-export default Login;
+export default Register;
