@@ -2,6 +2,7 @@ import { Navbar, Nav } from "react-bootstrap";
 import styled from "styled-components";
 import Menu from "../../img/menu.png";
 import { Button } from "@chakra-ui/react";
+import { RefObject } from "react";
 const MenuWrapper = styled.div`
   .navbar-toggler-icon {
     background-image: url(${Menu});
@@ -12,8 +13,35 @@ const MenuWrapper = styled.div`
     box-shadow: none;
   }
 `;
+interface NavbarProps {
+  shareRef: RefObject<HTMLDivElement>;
+  collabRef: RefObject<HTMLDivElement>;
+  objectRef: RefObject<HTMLDivElement>;
+}
 
-const NavbarComponent = () => {
+const NavbarComponent = (props: NavbarProps) => {
+  const gotoShare = () => {
+    if (props.shareRef.current) {
+      props.shareRef.current.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
+  };
+  const gotoCollab = () => {
+    if (props.collabRef.current) {
+      props.collabRef.current.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
+  };
+  const gotoObject = () => {
+    if (props.objectRef.current) {
+      props.objectRef.current.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <div>
       <Navbar
@@ -42,6 +70,7 @@ const NavbarComponent = () => {
                 color: "white",
                 alignSelf: "center",
               }}
+              onClick={gotoShare}
             >
               ¿Por qué Devfi?
             </Nav.Link>
@@ -50,16 +79,18 @@ const NavbarComponent = () => {
                 color: "white",
                 alignSelf: "center",
               }}
+              onClick={gotoCollab}
             >
-              Sobre nosotros
+              ¿Cómo funciona?
             </Nav.Link>
             <Nav.Link
               style={{
                 color: "white",
                 alignSelf: "center",
               }}
+              onClick={gotoObject}
             >
-              ¿Cómo funciona?
+              Nuestro objetivo
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

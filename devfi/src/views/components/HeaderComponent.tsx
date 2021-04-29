@@ -28,12 +28,7 @@ const Title = styled.h1`
   font-size: 2.4em;
 `;
 
-interface HeaderComponentProps {
-  goToRefAbout: () => void;
-  goToRefContact: () => void;
-}
-
-const HeaderComponent = (props: HeaderComponentProps) => {
+const HeaderComponent = () => {
   return (
     <div style={{ position: "relative" }}>
       <Container>
@@ -68,16 +63,10 @@ const HeaderComponent = (props: HeaderComponentProps) => {
                 colorScheme="blue"
                 size="md"
                 style={{ marginRight: "10px" }}
-                onClick={props.goToRefContact}
               >
                 ¡Pruébalo ya!
               </Button>
-              <Button
-                colorScheme="whiteAlpha"
-                size="md"
-                variant="outline"
-                onClick={props.goToRefAbout}
-              >
+              <Button colorScheme="whiteAlpha" size="md" variant="outline">
                 ¿Cómo funciona?
               </Button>
             </div>
