@@ -58,7 +58,6 @@ const Login = () => {
   useEffect(() => {
     if (localStorage.getItem("accessToken")) {
       history.push("/dashboard");
-      window.location.reload();
     } else {
       console.log("No access token");
     }
@@ -98,7 +97,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     const res = await axios
-      .post("https://habita-app.herokuapp.com/api/user/login", {
+      .post("http://localhost:8080/api/user/login", {
         email,
         password,
       })

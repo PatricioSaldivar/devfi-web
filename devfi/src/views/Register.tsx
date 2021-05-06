@@ -97,9 +97,26 @@ const Register = () => {
     history.push("/register");
   }
 
+  const handleRegister = async () => {
+    const res = await axios
+      .post("http://localhost:8080/api/user/register", {
+        email,
+        fullName: name,
+        password,
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          handleLogin();
+        }
+      })
+      .catch((err) => {
+        if (err.response.status === 404) console.log("Incorrect email");
+        if (err.response.status === 400) console.log("Incorrect password");
+      });
+  };
   const handleLogin = async () => {
     const res = await axios
-      .post("https://habita-app.herokuapp.com/api/user/login", {
+      .post("http://localhost:8080/api/user/login", {
         email,
         password,
       })
@@ -117,7 +134,6 @@ const Register = () => {
         if (err.response.status === 400) console.log("Incorrect password");
       });
   };
-
   const pushDashboard = () => {
     history.push("/dashboard");
   };
@@ -201,7 +217,7 @@ const Register = () => {
                     width: "175px ",
                     backgroundColor: "#0f1f47",
                   }}
-                  onClick={handleLogin}
+                  onClick={handleRegister}
                 >
                   Registrate
                 </Button>
