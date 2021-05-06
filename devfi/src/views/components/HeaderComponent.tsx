@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Row, Col } from "react-bootstrap";
 import { Button } from "@chakra-ui/react";
 import Collaborate from "../../img/collaborate.png";
+import { Navbar, Nav } from "react-bootstrap";
 
 const Container = styled.div`
   position: relative;
@@ -66,9 +67,16 @@ const HeaderComponent = () => {
               >
                 ¡Pruébalo ya!
               </Button>
+              <Nav.Link
+              style={{ color: "white", alignSelf: "center" }}
+              href="/FAQ"
+            >
+              {" "}
               <Button colorScheme="whiteAlpha" size="md" variant="outline">
-                ¿Cómo funciona?
+                Preguntas Frecuentes
               </Button>
+            </Nav.Link>
+              
             </div>
           </Col>
           <Col xs={12} md={6} style={{ zIndex: 1000 }}>

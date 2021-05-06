@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Landing from "./views/Landing";
 import Login from "./views/Login";
+import FAQ from "./views/FAQ";
 import { ChakraProvider } from "@chakra-ui/react";
 import NavbarComponent from "./views/components/NavbarComponent";
 import FooterComponent from "./views/components/FooterComponent";
@@ -24,6 +25,9 @@ export default function App() {
           <Switch>
             <Route path="/login">
               <Login />
+            </Route>
+            <Route path="/FAQ">
+              <FAQ />
             </Route>
             <Route path="/register">
               <Register />

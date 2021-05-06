@@ -181,6 +181,19 @@ const Landing = (props: LandingProps) => {
       <DarkContainer>
         <TitleWhite>Colabora y conoce personas de diversos paises</TitleWhite>
         <WhiteBar />
+        <Description
+          style={{
+            color: "white",
+            textAlign: "center",
+            paddingLeft: "128px",
+            paddingRight: "128px",
+            paddingBottom: "128px",
+            paddingTop: "64px",
+          }}
+        >
+          Con esta página facilmente podrás encontrar personas que mejor se ajusten a las necesidades desde tu proyecto, tu tienes el poder de poder
+          seleccionar a las personas que mejor se acomoden a tus necesidades sin importar en que parte del mundo esten.
+        </Description>
       </DarkContainer>
       <div ref={props.objectRef}></div>
       <div style={{ padding: "16px", display: "flex", flexFlow: "column" }}>
