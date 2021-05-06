@@ -33,15 +33,15 @@ export default function App() {
             <Route path="/register">
               <Register />
             </Route>
-            <Route path="/dashboard">
-              <Dashboard />
-            </Route>
-            <Route path="/">
-              <Landing
+            <Route path="/landing">
+            <Landing
                 shareRef={shareRef}
                 collabRef={collabRef}
                 objectRef={objectRef}
               />
+            </Route>
+            <Route path="/">
+              <Dashboard />
             </Route>
           </Switch>
         </div>

@@ -3,6 +3,7 @@ import { Row, Col } from "react-bootstrap";
 import { Button } from "@chakra-ui/react";
 import Collaborate from "../../img/collaborate.png";
 import { Navbar, Nav } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 
 const Container = styled.div`
   position: relative;
@@ -30,6 +31,7 @@ const Title = styled.h1`
 `;
 
 const HeaderComponent = () => {
+  let history = useHistory();
   return (
     <div style={{ position: "relative" }}>
       <Container>
@@ -64,6 +66,7 @@ const HeaderComponent = () => {
                 colorScheme="blue"
                 size="md"
                 style={{ marginRight: "10px" }}
+                onClick={() => history.push("/register")}
               >
                 ¡Pruébalo ya!
               </Button>

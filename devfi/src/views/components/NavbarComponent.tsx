@@ -29,6 +29,9 @@ const NavbarComponent = (props: NavbarProps) => {
       });
     }
   };
+  const signOut = () => {
+    localStorage.removeItem("accessToken")
+  }
   const gotoCollab = () => {
     if (props.collabRef.current) {
       props.collabRef.current.scrollIntoView({
@@ -64,6 +67,8 @@ const NavbarComponent = (props: NavbarProps) => {
         <MenuWrapper>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         </MenuWrapper>
+        {
+          !localStorage.getItem("accessToken") && 
         <Navbar.Collapse className="justify-content-center">
           <Nav className="justify-content-end navbar-right">
             <Nav.Link
@@ -95,7 +100,10 @@ const NavbarComponent = (props: NavbarProps) => {
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
+        }
         <Navbar.Collapse className="justify-content-end">
+        {
+          !localStorage.getItem("accessToken") && 
           <Nav className="justify-content-end navbar-right">
             <Nav.Link
               style={{
@@ -116,6 +124,24 @@ const NavbarComponent = (props: NavbarProps) => {
               </Button>
             </Nav.Link>
           </Nav>
+        }
+
+        {
+          localStorage.getItem("accessToken") && 
+          <Nav className="justify-content-end navbar-right">
+            <Nav.Link
+              style={{
+                color: "white",
+                alignSelf: "center",
+              }}
+              onClick={signOut}
+              href="/"
+            >
+              Cerrar sesión
+            </Nav.Link>
+          </Nav>
+        }
+
         </Navbar.Collapse>
       </Navbar>
     </div>

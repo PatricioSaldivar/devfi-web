@@ -5,6 +5,7 @@ import Saas1 from "../img/saas1.png";
 import Saas3 from "../img/saas3.png";
 import HeaderComponent from "./components/HeaderComponent";
 import { RefObject, useRef } from "react";
+import { useHistory } from "react-router-dom";
 /**
  * Styled components definitions
  */
@@ -90,6 +91,8 @@ interface LandingProps {
 }
 
 const Landing = (props: LandingProps) => {
+
+  let history = useHistory();
   return (
     <div>
       <div
@@ -142,7 +145,7 @@ const Landing = (props: LandingProps) => {
             Comparte tus proyectos en la plataforma para que los usuarios puedan
             interactuar con tus publicaciones y contactarse contigo.
           </ProductDesctiption>
-          <Button colorScheme="blue" size="md" variant="outline">
+          <Button colorScheme="blue" size="md" variant="outline" onClick={() => history.push("/register")} >
             ¡Pruébalo ya!
           </Button>
         </CustomColContainer>
@@ -168,7 +171,7 @@ const Landing = (props: LandingProps) => {
             Visualiza los diferentes proyectos publicados en Devfi para poder
             ver las diversas oportunidades donde puedas colaborar
           </ProductDesctiption>
-          <Button colorScheme="blue" size="md" variant="outline">
+          <Button colorScheme="blue" size="md" variant="outline" onClick={() => history.push("/register")}>
             ¡Pruébalo ya!
           </Button>
         </CustomColContainer>

@@ -28,7 +28,12 @@ const Container = styled.div`
 const Login = () => {
   let history = useHistory();
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (!localStorage.getItem("accessToken")) {
+      history.push("/landing");
+      console.log("No access token");
+    }
+  }, []);
 
   return (
     <Container>
