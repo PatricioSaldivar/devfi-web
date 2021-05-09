@@ -30,8 +30,8 @@ const NavbarComponent = (props: NavbarProps) => {
     }
   };
   const signOut = () => {
-    localStorage.removeItem("accessToken")
-  }
+    localStorage.removeItem("accessToken");
+  };
   const gotoCollab = () => {
     if (props.collabRef.current) {
       props.collabRef.current.scrollIntoView({
@@ -54,7 +54,6 @@ const NavbarComponent = (props: NavbarProps) => {
         style={{
           background: "#0F1F47",
           zIndex: 1000,
-          position: "absolute",
           paddingTop: 50,
           paddingLeft: 50,
           paddingRight: 50,
@@ -67,81 +66,77 @@ const NavbarComponent = (props: NavbarProps) => {
         <MenuWrapper>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         </MenuWrapper>
-        {
-          !localStorage.getItem("accessToken") && 
-        <Navbar.Collapse className="justify-content-center">
-          <Nav className="justify-content-end navbar-right">
-            <Nav.Link
-              style={{
-                color: "white",
-                alignSelf: "center",
-              }}
-              onClick={gotoShare}
-            >
-              ¿Por qué Devfi?
-            </Nav.Link>
-            <Nav.Link
-              style={{
-                color: "white",
-                alignSelf: "center",
-              }}
-              onClick={gotoCollab}
-            >
-              ¿Cómo funciona?
-            </Nav.Link>
-            <Nav.Link
-              style={{
-                color: "white",
-                alignSelf: "center",
-              }}
-              onClick={gotoObject}
-            >
-              Nuestro objetivo
-            </Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-        }
+        {!localStorage.getItem("accessToken") && (
+          <Navbar.Collapse className="justify-content-center">
+            <Nav className="justify-content-end navbar-right">
+              <Nav.Link
+                style={{
+                  color: "white",
+                  alignSelf: "center",
+                }}
+                onClick={gotoShare}
+              >
+                ¿Por qué Devfi?
+              </Nav.Link>
+              <Nav.Link
+                style={{
+                  color: "white",
+                  alignSelf: "center",
+                }}
+                onClick={gotoCollab}
+              >
+                ¿Cómo funciona?
+              </Nav.Link>
+              <Nav.Link
+                style={{
+                  color: "white",
+                  alignSelf: "center",
+                }}
+                onClick={gotoObject}
+              >
+                Nuestro objetivo
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        )}
         <Navbar.Collapse className="justify-content-end">
-        {
-          !localStorage.getItem("accessToken") && 
-          <Nav className="justify-content-end navbar-right">
-            <Nav.Link
-              style={{
-                color: "white",
-                alignSelf: "center",
-              }}
-              href="/login"
-            >
-              Iniciar sesión
-            </Nav.Link>
-            <Nav.Link
-              style={{ color: "white", alignSelf: "center" }}
-              href="/register"
-            >
-              {" "}
-              <Button colorScheme="blue" size="md">
-                Registrate
-              </Button>
-            </Nav.Link>
-          </Nav>
-        }
+          {!localStorage.getItem("accessToken") && (
+            <Nav className="justify-content-end navbar-right">
+              <Nav.Link
+                style={{
+                  color: "white",
+                  alignSelf: "center",
+                }}
+                href="/login"
+              >
+                Iniciar sesión
+              </Nav.Link>
+              <Nav.Link
+                style={{ color: "white", alignSelf: "center" }}
+                href="/register"
+              >
+                {" "}
+                <Button colorScheme="blue" size="md">
+                  Registrate
+                </Button>
+              </Nav.Link>
+            </Nav>
+          )}
 
-        {
-          localStorage.getItem("accessToken") && 
-          <Nav className="justify-content-end navbar-right">
-            <Nav.Link
-              style={{
-                color: "white",
-                alignSelf: "center",
-              }}
-              onClick={signOut}
-              href="/"
-            >
-              Cerrar sesión
-            </Nav.Link>
-          </Nav>
-        }
-
+          {localStorage.getItem("accessToken") && (
+            <Nav className="justify-content-end navbar-right">
+              <Nav.Link
+                style={{
+                  color: "white",
+                  alignSelf: "center",
+                }}
+                onClick={signOut}
+                href="/"
+              >
+                Cerrar sesión
+              </Nav.Link>
+            </Nav>
+          )}
         </Navbar.Collapse>
       </Navbar>
     </div>

@@ -8,45 +8,48 @@ import NavbarComponent from "./views/components/NavbarComponent";
 import FooterComponent from "./views/components/FooterComponent";
 import Register from "./views/Register";
 import Dashboard from "./views/Dashboard";
-
+import { QueryClientProvider, QueryClient } from "react-query";
+const queryClient = new QueryClient();
 export default function App() {
   const shareRef = useRef<HTMLDivElement>(null);
   const collabRef = useRef<HTMLDivElement>(null);
   const objectRef = useRef<HTMLDivElement>(null);
 
   return (
-    <ChakraProvider>
-      <NavbarComponent
-        shareRef={shareRef}
-        collabRef={collabRef}
-        objectRef={objectRef}
-      />
-      <Router>
-        <div>
-          <Switch>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/FAQ">
-              <FAQ />
-            </Route>
-            <Route path="/register">
-              <Register />
-            </Route>
-            <Route path="/landing">
-            <Landing
-                shareRef={shareRef}
-                collabRef={collabRef}
-                objectRef={objectRef}
-              />
-            </Route>
-            <Route path="/">
-              <Dashboard />
-            </Route>
-          </Switch>
-        </div>
-      </Router>
-      <FooterComponent />
-    </ChakraProvider>
+    <QueryClientProvider client={queryClient}>
+      <ChakraProvider>
+        <NavbarComponent
+          shareRef={shareRef}
+          collabRef={collabRef}
+          objectRef={objectRef}
+        />
+        <Router>
+          <div>
+            <Switch>
+              <Route path="/login">
+                <Login />
+              </Route>
+              <Route path="/FAQ">
+                <FAQ />
+              </Route>
+              <Route path="/register">
+                <Register />
+              </Route>
+              <Route path="/landing">
+                <Landing
+                  shareRef={shareRef}
+                  collabRef={collabRef}
+                  objectRef={objectRef}
+                />
+              </Route>
+              <Route path="/">
+                <Dashboard />
+              </Route>
+            </Switch>
+          </div>
+        </Router>
+        <FooterComponent />
+      </ChakraProvider>
+    </QueryClientProvider>
   );
 }

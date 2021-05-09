@@ -3,6 +3,10 @@ import styled from "styled-components";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
 import { useEffect } from "react";
+import { useProjects } from "../hooks/useProjects";
+import { Project } from "../Types";
+import ProjectComponent from "./components/ProjectComponent";
+import { Row } from "react-bootstrap";
 
 const theme = createMuiTheme({
   palette: {
@@ -20,13 +24,14 @@ const Container = styled.div`
   justify-content: center;
   display: flex;
   color: black;
-  height: 600px;
+  height: 100%;
   width: 100%;
   background: white;
 `;
 
 const Login = () => {
   let history = useHistory();
+  const { data: projects } = useProjects();
 
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
@@ -37,7 +42,18 @@ const Login = () => {
 
   return (
     <Container>
-      <p>Dashboard</p>
+      <Row
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignContent: "center",
+        }}
+      >
+        {projects.length <= 0 && <p>Actualmente no existen proyectos.</p>}
+        {projects.map((project: Project) => {
+          return <ProjectComponent project={project} key={project._id} />;
+        })}
+      </Row>
     </Container>
   );
 };
