@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { useProjects } from "../hooks/useProjects";
 import { Project } from "../Types";
 import ProjectComponent from "./components/ProjectComponent";
-import { Row } from "react-bootstrap";
+import { Button, Row } from "react-bootstrap";
 import { UserContext } from "../context/UserContextProvider";
 import { useUserProjects } from "../hooks/useUserProjects";
 
@@ -25,6 +25,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   display: flex;
+  flex-flow: column;
   color: black;
   height: 100%;
   width: 100%;
@@ -45,9 +46,16 @@ const ProjectsView = () => {
 
   return (
     <Container>
+      <Button
+        style={{ width: "100%" }}
+        onClick={() => history.push("/project/add")}
+      >
+        Agregar nuevo proyecto.
+      </Button>
       <Row
         style={{
           display: "flex",
+          width: "100%",
           justifyContent: "center",
           alignContent: "center",
         }}

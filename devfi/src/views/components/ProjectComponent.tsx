@@ -20,7 +20,7 @@ const ProjectComponent = (props: ProjectComponentProps) => {
   };
 
   return (
-    <Col xs={12} md={4} className="justify-content-center">
+    <Col xs={12} md={4}>
       <Card
         style={{
           width: "18rem",

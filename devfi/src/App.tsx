@@ -12,6 +12,7 @@ import { QueryClientProvider, QueryClient } from "react-query";
 import ProjectsView from "./views/ProjectsView";
 import UserProvider from "./context/UserContextProvider";
 import ProjectView from "./views/ProjectView";
+import AddProjectView from "./views/AddProjectView";
 const queryClient = new QueryClient();
 export default function App() {
   const shareRef = useRef<HTMLDivElement>(null);
@@ -19,48 +20,53 @@ export default function App() {
   const objectRef = useRef<HTMLDivElement>(null);
 
   return (
-    <UserProvider>
-      <QueryClientProvider client={queryClient}>
-        <ChakraProvider>
-          <NavbarComponent
-            shareRef={shareRef}
-            collabRef={collabRef}
-            objectRef={objectRef}
-          />
-          <Router>
-            <div>
-              <Switch>
-                <Route path="/login">
-                  <Login />
-                </Route>
-                <Route path="/FAQ">
-                  <FAQ />
-                </Route>
-                <Route path="/project/:id">
-                  <ProjectView />
-                </Route>
-                <Route path="/projects">
-                  <ProjectsView />
-                </Route>
-                <Route path="/register">
-                  <Register />
-                </Route>
-                <Route path="/landing">
-                  <Landing
-                    shareRef={shareRef}
-                    collabRef={collabRef}
-                    objectRef={objectRef}
-                  />
-                </Route>
-                <Route path="/">
-                  <Dashboard />
-                </Route>
-              </Switch>
-            </div>
-          </Router>
-          <FooterComponent />
-        </ChakraProvider>
-      </QueryClientProvider>
-    </UserProvider>
+    <div className="App">
+      <UserProvider>
+        <QueryClientProvider client={queryClient}>
+          <ChakraProvider>
+            <NavbarComponent
+              shareRef={shareRef}
+              collabRef={collabRef}
+              objectRef={objectRef}
+            />
+            <Router>
+              <div>
+                <Switch>
+                  <Route path="/login">
+                    <Login />
+                  </Route>
+                  <Route path="/FAQ">
+                    <FAQ />
+                  </Route>
+                  <Route path="/project/add">
+                    <AddProjectView />
+                  </Route>
+                  <Route path="/project/:id">
+                    <ProjectView />
+                  </Route>
+                  <Route path="/projects">
+                    <ProjectsView />
+                  </Route>
+                  <Route path="/register">
+                    <Register />
+                  </Route>
+                  <Route path="/landing">
+                    <Landing
+                      shareRef={shareRef}
+                      collabRef={collabRef}
+                      objectRef={objectRef}
+                    />
+                  </Route>
+                  <Route path="/">
+                    <Dashboard />
+                  </Route>
+                </Switch>
+              </div>
+            </Router>
+            <FooterComponent />
+          </ChakraProvider>
+        </QueryClientProvider>
+      </UserProvider>
+    </div>
   );
 }

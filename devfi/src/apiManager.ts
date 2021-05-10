@@ -1,6 +1,6 @@
 // This file is used for the different API requests of Convee.
 import axios from "axios";
-import { LoginResponse } from "./Types";
+import { LoginResponse, Project, ProjectCreate } from "./Types";
 
 let URL: string;
 
@@ -52,9 +52,6 @@ export const GetProjectById = async(projectId:string)=>{
   
 }
 
-
-
-//Bearer: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDk0NjZkOGVhMWE1OTQ1NTI1ODgwYTkiLCJlbWFpbCI6ImVkaXRAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkRTE1bE04TXhuck1XaUlXeUczcTQvLnlxSlI5b2E5OXlvSnBqT0R5Z3NLWlVBUVozbVhhbjYiLCJfX3YiOjAsImlhdCI6MTYyMDYwNjMwMCwiZXhwIjoxNjIwNjE3MTAwfQ.flZecXFnAHCqsLcYMS6ARCIyBpREEHVr8DH4cTMYCDU
 export const GetUser = async(token:string)=>{
     try{
         let res = await axios.get("http://localhost:8080/api/user/me", {
@@ -62,6 +59,15 @@ export const GetUser = async(token:string)=>{
               'Authorization': `Bearer: ${token}`
             }
           });
+        return res;
+    }catch(e){
+        console.log(e);
+    }
+}
+
+export const CreateProject = async(project:ProjectCreate, userId:string)=>{
+    try{
+        let res = await axios.post(`http://localhost:8080/api/project/${userId}`,project );
         return res;
     }catch(e){
         console.log(e);

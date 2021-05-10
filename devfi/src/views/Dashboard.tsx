@@ -47,6 +47,7 @@ const Dashboard = () => {
         style={{
           display: "flex",
           justifyContent: "center",
+          width: "100%",
           alignContent: "center",
         }}
       >

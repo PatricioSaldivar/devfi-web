@@ -11,9 +11,20 @@ export interface Project{
     _id:string;
     name:string;
     description: string;
-    tags:[string];
+    github?:string;
+    colab:number;
+    tags:string[];
     user:string;
 };
+
+export interface ProjectCreate{
+    name:string;
+    description: string;
+    github?:string;
+    colab:number;
+    tags:string[];
+};
+
 
 export interface User{
     _id:string;
