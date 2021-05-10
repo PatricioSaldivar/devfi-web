@@ -8,6 +8,7 @@ import { Project } from "../Types";
 import ProjectComponent from "./components/ProjectComponent";
 import { Row } from "react-bootstrap";
 import { UserContext } from "../context/UserContextProvider";
+import { useUserProjects } from "../hooks/useUserProjects";
 
 const theme = createMuiTheme({
   palette: {
@@ -30,17 +31,18 @@ const Container = styled.div`
   background: white;
 `;
 
-const Dashboard = () => {
+const ProjectsView = () => {
   let history = useHistory();
-  const { data: projects } = useProjects();
   const { user } = useContext(UserContext);
+  const { data: projects } = useUserProjects(user && user._id);
+
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
       history.push("/landing");
       console.log("No access token");
     }
   }, []);
-  console.log(user);
+
   return (
     <Container>
       <Row
@@ -71,4 +73,4 @@ const Dashboard = () => {
     </Container>
   );
 };
-export default Dashboard;
+export default ProjectsView;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, TextField } from "@material-ui/core";
 import styled from "styled-components";
 import axios from "axios";
@@ -7,6 +7,7 @@ import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
 import { useEffect } from "react";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import { UserContext } from "../context/UserContextProvider";
 
 const theme = createMuiTheme({
   palette: {
@@ -44,13 +45,13 @@ const Login = () => {
   let history = useHistory();
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-
-  const [accessToken, setAccessToken] = useLocalStorage<string>(
+  const { LogIn, accessToken, refreshToken } = useContext(UserContext);
+  const [accessTokenH, setAccessTokenH] = useLocalStorage<string>(
     "accessToken",
     ""
   );
 
-  const [refreshToken, setRefreshToken] = useLocalStorage<string>(
+  const [refreshTokenH, setRefreshTokenH] = useLocalStorage<string>(
     "refreshToken",
     ""
   );
@@ -95,31 +96,22 @@ const Login = () => {
     history.push("/register");
   }
 
-  const handleLogin = async () => {
-    const res = await axios
-      .post("http://localhost:8080/api/user/login", {
-        email,
-        password,
-      })
-      .then((res) => {
-        if (res.status === 200) {
-          const { accessToken, refreshToken } = res.data;
-          setAccessToken(accessToken);
-          setRefreshToken(refreshToken);
-          pushDashboard();
-          window.location.reload();
-        }
-      })
-      .catch((err) => {
-        if (err.response.status === 404) console.log("Incorrect email");
-        if (err.response.status === 400) console.log("Incorrect password");
-      });
-  };
-
   const pushDashboard = () => {
     history.push("/dashboard");
   };
 
+  const handleLogin = async () => {
+    //@ts-ignore
+    let res = await LogIn(email, password);
+
+    if (res.isValid) {
+      setAccessTokenH(res.accessToken);
+      setRefreshTokenH(res.refreshToken);
+      pushDashboard();
+    } else {
+      console.log("Error logging in");
+    }
+  };
   return (
     <MuiThemeProvider theme={theme}>
       <Container>

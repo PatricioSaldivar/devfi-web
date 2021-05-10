@@ -2,9 +2,10 @@ import { Navbar, Nav } from "react-bootstrap";
 import styled from "styled-components";
 import Menu from "../../img/menu.png";
 import { Button } from "@chakra-ui/react";
-import { RefObject } from "react";
+import { RefObject, useContext } from "react";
 import Logo from "../../img/logo.png";
 import { useHistory } from "react-router";
+import { UserContext } from "../../context/UserContextProvider";
 const MenuWrapper = styled.div`
   .navbar-toggler-icon {
     background-image: url(${Menu});
@@ -22,6 +23,8 @@ interface NavbarProps {
 }
 
 const NavbarComponent = (props: NavbarProps) => {
+  const { LogOut } = useContext(UserContext);
+  let history = useHistory();
   const gotoShare = () => {
     if (props.shareRef.current) {
       props.shareRef.current.scrollIntoView({
@@ -30,7 +33,8 @@ const NavbarComponent = (props: NavbarProps) => {
     }
   };
   const signOut = () => {
-    localStorage.removeItem("accessToken");
+    LogOut();
+    history.push("/landing");
   };
   const gotoCollab = () => {
     if (props.collabRef.current) {
@@ -125,6 +129,24 @@ const NavbarComponent = (props: NavbarProps) => {
 
           {localStorage.getItem("accessToken") && (
             <Nav className="justify-content-end navbar-right">
+              <Nav.Link
+                style={{
+                  color: "white",
+                  alignSelf: "center",
+                }}
+                href="/"
+              >
+                Inicio
+              </Nav.Link>
+              <Nav.Link
+                style={{
+                  color: "white",
+                  alignSelf: "center",
+                }}
+                href="/projects"
+              >
+                Mis proyectos
+              </Nav.Link>
               <Nav.Link
                 style={{
                   color: "white",
