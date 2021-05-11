@@ -40,7 +40,6 @@ const Dashboard = () => {
       console.log("No access token");
     }
   }, []);
-  console.log(user);
   return (
     <Container>
       <Row

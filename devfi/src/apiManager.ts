@@ -73,3 +73,12 @@ export const CreateProject = async(project:ProjectCreate, userId:string)=>{
         console.log(e);
     }
 }
+
+export const EditProject = async (project:ProjectCreate, projectId:string)=>{
+    try{
+        let res = await axios.put(`http://localhost:8080/api/project/${projectId}`,project );
+        return res;
+    }catch(e){
+        console.log(e);
+    }
+}

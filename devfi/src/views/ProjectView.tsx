@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { UserContext } from "../context/UserContextProvider";
 import { useProject } from "../hooks/useProject";
 import { Tag } from "@chakra-ui/react";
+import { Button } from "react-bootstrap";
 
 const theme = createMuiTheme({
   palette: {
@@ -51,10 +52,19 @@ const ProjectView = () => {
       <div>
         <ProjectTitle>{project.name}</ProjectTitle>
         {project.tags &&
-          project.tags.map((tag: string) => {
-            return <Tag style={{ marginRight: 10 }}>{tag}</Tag>;
+          project.tags.map((tag: string, index: number) => {
+            return (
+              <Tag style={{ marginRight: 10 }} key={index}>
+                {tag}
+              </Tag>
+            );
           })}
         <h1>{project.description}</h1>
+        {project.user === user._id && (
+          <Button onClick={() => history.push(`/project/edit/${project._id}`)}>
+            Editar projecto
+          </Button>
+        )}
       </div>
     </Container>
   );

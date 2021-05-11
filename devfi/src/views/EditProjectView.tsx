@@ -12,11 +12,12 @@ import {
   NumberDecrementStepper,
   Tag,
 } from "@chakra-ui/react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
-import { CreateProject } from "../apiManager";
+import { CreateProject, EditProject } from "../apiManager";
 import { UserContext } from "../context/UserContextProvider";
+import { useProject } from "../hooks/useProject";
 
 const Container = styled.div`
   padding: 32px;
@@ -32,27 +33,35 @@ const Title = styled.h1`
   font-size: 30px;
   margin-bottom: 5px;
 `;
-const AddProjectView = () => {
+interface ParamTypes {
+  id: string;
+}
+const EditProjectView = () => {
   let history = useHistory();
   let { user } = useContext(UserContext);
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [github, setGithub] = useState("");
-  const [colab, setColab] = useState(0);
-  const [tags, setTags] = useState<string[]>([]);
+  let { id } = useParams<ParamTypes>();
+  const { data: project } = useProject(id);
+  const [name, setName] = useState(project.name);
+  const [description, setDescription] = useState(project.description);
+  const [github, setGithub] = useState(project.github);
+  const [colab, setColab] = useState(project.colab);
+  const [tags, setTags] = useState<string[]>(project.tags);
   const [tag, setTag] = useState("");
   const toast = useToast();
 
   useEffect(() => {
+    if (project.user != user._id) {
+      history.push("/");
+    }
     if (!localStorage.getItem("accessToken")) {
       history.push("/");
     } else {
       console.log("No access token");
     }
   }, []);
-  const handleAddProject = async () => {
+  const handleEditProject = async () => {
     if (name != "" && description != "" && colab > 0) {
-      let response = await CreateProject(
+      let response = await EditProject(
         {
           name,
           description,
@@ -60,20 +69,14 @@ const AddProjectView = () => {
           github,
           tags,
         },
-        user._id
+        project._id
       );
       toast({
-        title: "El projecto fue creado de manera exitosa.",
+        title: "El projecto fue editado de manera exitosa.",
         status: "success",
         duration: 9000,
         isClosable: true,
       });
-      setName("");
-      setDescription("");
-      setColab(0);
-      setGithub("");
-      setTags([]);
-      setTag("");
     } else {
       toast({
         title: "Favor de llenar los campos.",
@@ -98,7 +101,7 @@ const AddProjectView = () => {
 
   return (
     <Container>
-      <Title>Agregar proyecto</Title>
+      <Title>Editar proyecto</Title>
       <div>
         <Row>
           <Col xs={12}>
@@ -157,28 +160,29 @@ const AddProjectView = () => {
           </Col>
         </Row>
         <div style={{ marginBottom: 10 }}>
-          {tags.map((t, index) => {
-            return (
-              <Tag style={{ marginRight: 5 }} key={index}>
-                {t}
-                <a
-                  onClick={() => handleDelete(t)}
-                  style={{
-                    marginLeft: "10px",
-                    fontFamily: "revert",
-                    color: "grey",
-                  }}
-                >
-                  x
-                </a>
-              </Tag>
-            );
-          })}
+          {tags &&
+            tags.map((t, index) => {
+              return (
+                <Tag style={{ marginRight: 5 }} key={index}>
+                  {t}
+                  <a
+                    onClick={() => handleDelete(t)}
+                    style={{
+                      marginLeft: "10px",
+                      fontFamily: "revert",
+                      color: "grey",
+                    }}
+                  >
+                    x
+                  </a>
+                </Tag>
+              );
+            })}
         </div>
 
-        <Button onClick={handleAddProject}>Agregar proyecto</Button>
+        <Button onClick={handleEditProject}>Editar proyecto</Button>
       </div>
     </Container>
   );
 };
-export default AddProjectView;
+export default EditProjectView;
