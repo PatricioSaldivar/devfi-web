@@ -15,7 +15,7 @@ import {
 import { useHistory, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
-import { CreateProject, EditProject } from "../apiManager";
+import { CreateProject, DeleteProject, EditProject } from "../apiManager";
 import { UserContext } from "../context/UserContextProvider";
 import { useProject } from "../hooks/useProject";
 
@@ -99,6 +99,20 @@ const EditProjectView = () => {
     setTags(newTags);
   };
 
+  const handleDeleteProject = async () => {
+    let response = await DeleteProject(project._id);
+    gotoProjects();
+    toast({
+      title: "El projecto fue borrado de manera exitosa.",
+      status: "success",
+      duration: 9000,
+      isClosable: true,
+    });
+  };
+
+  const gotoProjects = async () => {
+    await history.push("/projects");
+  };
   return (
     <Container>
       <Title>Editar proyecto</Title>
@@ -181,6 +195,13 @@ const EditProjectView = () => {
         </div>
 
         <Button onClick={handleEditProject}>Editar proyecto</Button>
+        <Button
+          style={{ marginLeft: 10 }}
+          color="red"
+          onClick={handleDeleteProject}
+        >
+          Borrar proyecto
+        </Button>
       </div>
     </Container>
   );
