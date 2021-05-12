@@ -44,7 +44,7 @@ export default function App() {
                   <Route path="/profile" exact>
                     <Profile />
                   </Route>
-                  <Route path="/profile/edit" >
+                  <Route path="/profile/edit/:id">
                     <ProfileEdit />
                   </Route>
                   <Route path="/project/add">

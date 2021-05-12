@@ -14,7 +14,6 @@ export const useProject = (projectId: string) => {
     {
       initialData: [],
       // Keep data fresh.
-      // Only fetch when a valid restaurant id is provided.
       enabled: !!projectId,
     }
   );

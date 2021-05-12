@@ -134,18 +134,18 @@ const NavbarComponent = (props: NavbarProps) => {
                   color: "white",
                   alignSelf: "center",
                 }}
-                href="/profile"
+                href="/"
               >
-                Perfil
+                Inicio
               </Nav.Link>
               <Nav.Link
                 style={{
                   color: "white",
                   alignSelf: "center",
                 }}
-                href="/"
+                href="/profile"
               >
-                Inicio
+                Perfil
               </Nav.Link>
               <Nav.Link
                 style={{

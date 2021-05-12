@@ -1,6 +1,6 @@
 // This file is used for the different API requests of Convee.
 import axios from "axios";
-import { ProjectCreate } from "./Types";
+import { ProfileCreate, ProjectCreate } from "./Types";
 
 let URL: string;
 
@@ -54,8 +54,7 @@ export const GetProjectById = async(projectId:string)=>{
 
 export const GetUserInfo = async(userId:string)=>{
   try {
-      let response = await axios.get(URL + `/user/info/:id/${userId}`);
-  
+      let response = await axios.get(URL + `user/info/${userId}`);
       return response.data;
     } catch (e) {
       console.log(e);

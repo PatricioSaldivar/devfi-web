@@ -25,7 +25,14 @@ export interface ProjectCreate{
     tags:string[];
 };
 
+export interface ProfileCreate{
+    fullName:string;
+    university:string;
+    objectives:string;
+    languages:[string];
+    github:string;
 
+}
 export interface User{
     _id:string;
     email:string;
