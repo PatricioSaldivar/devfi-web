@@ -2,7 +2,6 @@ import { useQuery } from "react-query";
 import { GetProjectsByUserId } from "../apiManager";
 
 const fetchUserProjects = async (userId: string) => {
-  console.log(userId);
   return GetProjectsByUserId(userId);
 };
 
