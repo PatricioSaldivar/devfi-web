@@ -17,6 +17,7 @@ import { useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import { CreateProject } from "../apiManager";
 import { UserContext } from "../context/UserContextProvider";
+import validator from "validator"
 
 const Container = styled.div`
   padding: 32px;
@@ -41,7 +42,19 @@ const AddProjectView = () => {
   const [colab, setColab] = useState(0);
   const [tags, setTags] = useState<string[]>([]);
   const [tag, setTag] = useState("");
+  const [mail, setMail] = useState("");
   const toast = useToast();
+  
+  const validateEmail = (email:string) => {
+    if (!validator.isEmail(email) && email !== "") {
+      toast({
+        title: "Email incorrecto.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+  }
 
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
@@ -51,7 +64,7 @@ const AddProjectView = () => {
     }
   }, []);
   const handleAddProject = async () => {
-    if (name != "" && description != "" && colab > 0) {
+    if (name != "" && description != "" && colab > 0 && (mail === "" || validator.isEmail(mail))) {
       let response = await CreateProject(
         {
           name,
@@ -59,6 +72,7 @@ const AddProjectView = () => {
           colab,
           github,
           tags,
+          mail,
         },
         user._id
       );
@@ -74,6 +88,7 @@ const AddProjectView = () => {
       setGithub("");
       setTags([]);
       setTag("");
+      setMail("");
     } else {
       toast({
         title: "Favor de llenar los campos.",
@@ -141,6 +156,16 @@ const AddProjectView = () => {
                 <NumberDecrementStepper />
               </NumberInputStepper>
             </NumberInput>
+          </Col>
+          <Col xs={12} md={6}>
+            <p>Mail Contacto</p>
+            <Input
+              placeholder="ejemplo@mail.com"
+              style={{ marginBottom: 10 }}
+              value={mail}
+              onChange={(e) => {setMail(e.target.value)}}
+              onBlur = {(e) => {validateEmail(e.target.value)}}
+            />
           </Col>
           <Col xs={12}>
             <p>Agregar etiquetas</p>

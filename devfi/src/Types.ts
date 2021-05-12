@@ -15,6 +15,7 @@ export interface Project{
     colab:number;
     tags:string[];
     user:string;
+    mail:string;
 };
 
 export interface ProjectCreate{
@@ -23,6 +24,7 @@ export interface ProjectCreate{
     github?:string;
     colab:number;
     tags:string[];
+    mail: string;
 };
 
 export interface ProfileCreate{

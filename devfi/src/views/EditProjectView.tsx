@@ -18,6 +18,7 @@ import { Row, Col } from "react-bootstrap";
 import { CreateProject, DeleteProject, EditProject } from "../apiManager";
 import { UserContext } from "../context/UserContextProvider";
 import { useProject } from "../hooks/useProject";
+import validator from "validator"
 
 const Container = styled.div`
   padding: 32px;
@@ -47,7 +48,19 @@ const EditProjectView = () => {
   const [colab, setColab] = useState(project.colab);
   const [tags, setTags] = useState<string[]>(project.tags);
   const [tag, setTag] = useState("");
+  const [mail, setMail] = useState(project.mail);
   const toast = useToast();
+
+  const validateEmail = (email:string) => {
+    if (!validator.isEmail(email) && email !== "") {
+      toast({
+        title: "Email incorrecto.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+  }
 
   useEffect(() => {
     if (project.user != user._id) {
@@ -60,7 +73,7 @@ const EditProjectView = () => {
     }
   }, []);
   const handleEditProject = async () => {
-    if (name != "" && description != "" && colab > 0) {
+    if (name != "" && description != "" && colab > 0 && (mail === "" || validator.isEmail(mail))) {
       let response = await EditProject(
         {
           name,
@@ -68,6 +81,7 @@ const EditProjectView = () => {
           colab,
           github,
           tags,
+          mail
         },
         project._id
       );
@@ -158,6 +172,16 @@ const EditProjectView = () => {
                 <NumberDecrementStepper />
               </NumberInputStepper>
             </NumberInput>
+          </Col>
+          <Col xs={12} md={6}>
+            <p>Mail Contacto</p>
+            <Input
+              placeholder="ejemplo@mail.com"
+              style={{ marginBottom: 10 }}
+              value={mail}
+              onChange={(e) => setMail(e.target.value)}
+              onBlur = {(e) => {validateEmail(e.target.value)}}
+            />
           </Col>
           <Col xs={12}>
             <p>Agregar etiquetas</p>
