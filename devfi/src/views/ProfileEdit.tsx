@@ -44,6 +44,10 @@ const ProfileEdit = () => {
   let { id } = useParams<ParamTypes>();
   const { data: profile } = useProfile(user && id);
   const [fullName, setFullName] = useState(profile.fullName);
+  const [university, setUniversity] = useState("");
+  const [objectives, setObjectives] = useState("");
+  const [languages, setLanguages] = useState("");
+  const [github, setGithub] = useState("");
   const toast = useToast();
 
   useEffect(() => {
@@ -67,12 +71,48 @@ const ProfileEdit = () => {
       <div>
         <Row>
           <Col xs={12}>
-            <p>Nombre del proyecto</p>
+            <p>Nombre Completo</p>
             <Input
-              placeholder="Proyecto pelos"
+              placeholder="Nombre Completo"
               style={{ marginBottom: 10 }}
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
+            />
+          </Col>
+          <Col xs={12}>
+            <p>Nombre de Universidad</p>
+            <Input
+              placeholder="Universidad"
+              style={{ marginBottom: 10 }}
+              value={university}
+              onChange={(e) => setUniversity(e.target.value)}
+            />
+          </Col>
+          <Col xs={12}>
+            <p>Objetivos personales</p>
+            <Input
+              placeholder="Objetivos"
+              style={{ marginBottom: 10 }}
+              value={objectives}
+              onChange={(e) => setObjectives(e.target.value)}
+            />
+          </Col>
+          <Col xs={12}>
+            <p>Lenguajes de Programación</p>
+            <Input
+              placeholder="Lenguajes"
+              style={{ marginBottom: 10 }}
+              value={languages}
+              onChange={(e) => setLanguages(e.target.value)}
+            />
+          </Col>
+          <Col xs={12}>
+            <p>Github Personal</p>
+            <Input
+              placeholder="Github"
+              style={{ marginBottom: 10 }}
+              value={github}
+              onChange={(e) => setGithub(e.target.value)}
             />
           </Col>
         </Row>
