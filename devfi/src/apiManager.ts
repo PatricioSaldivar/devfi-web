@@ -52,6 +52,17 @@ export const GetProjectById = async(projectId:string)=>{
   
 }
 
+export const GetUserInfo = async(userId:string)=>{
+  try {
+      let response = await axios.get(URL + `/user/info/:id/${userId}`);
+  
+      return response.data;
+    } catch (e) {
+      console.log(e);
+    }
+
+}
+
 export const GetUser = async(token:string)=>{
     try{
         let res = await axios.get("http://localhost:8080/api/user/me", {

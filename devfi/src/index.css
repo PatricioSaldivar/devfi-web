@@ -22,3 +22,26 @@ body {
   -o-user-select: none;
   user-select: none;
 }
+
+.button-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15px;
+}
+.button{
+  border-radius: 3px;
+   margin: 0 10px ;
+  border:1px solid black;
+  padding: 8px;
+  transition: all .3s;
+}
+.button:hover{
+  border-radius: 3px;
+  margin: 0 10px ;
+  border:1px solid black;
+  padding: 8px;
+  color: white;
+  background-color: black;
+  transition: all .3s;
+}

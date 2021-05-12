@@ -14,6 +14,8 @@ import UserProvider from "./context/UserContextProvider";
 import ProjectView from "./views/ProjectView";
 import AddProjectView from "./views/AddProjectView";
 import EditProjectView from "./views/EditProjectView";
+import Profile from "./views/Profile";
+import ProfileEdit from "./views/ProfileEdit";
 const queryClient = new QueryClient();
 export default function App() {
   const shareRef = useRef<HTMLDivElement>(null);
@@ -38,6 +40,12 @@ export default function App() {
                   </Route>
                   <Route path="/FAQ">
                     <FAQ />
+                  </Route>
+                  <Route path="/profile" exact>
+                    <Profile />
+                  </Route>
+                  <Route path="/profile/edit" >
+                    <ProfileEdit />
                   </Route>
                   <Route path="/project/add">
                     <AddProjectView />
