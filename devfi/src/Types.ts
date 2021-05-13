@@ -40,6 +40,13 @@ export interface User{
     email:string;
     fullName?: string;
 }
+export interface Profile{
+    fullName:string;
+    university:string;
+    objectives:string;
+    languages:string[];
+    github:string;
+}
 
 export type UserContextState = {
     user: User;

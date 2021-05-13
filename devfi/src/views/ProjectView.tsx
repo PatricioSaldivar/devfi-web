@@ -60,6 +60,13 @@ const ProjectView = () => {
             );
           })}
         <h1>{project.description}</h1>
+        {project.mail && (
+          <h1>
+            Correo de contacto:{" "}
+            <a href={`mailto:${project.mail}`}>{project.mail}</a>
+          </h1>
+        )}
+
         {project.user === user._id && (
           <Button onClick={() => history.push(`/project/edit/${project._id}`)}>
             Editar projecto

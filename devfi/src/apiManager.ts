@@ -1,6 +1,6 @@
 // This file is used for the different API requests of Convee.
 import axios from "axios";
-import { ProfileCreate, ProjectCreate } from "./Types";
+import { Profile, ProfileCreate, ProjectCreate, User } from "./Types";
 
 let URL: string;
 
@@ -101,4 +101,13 @@ export const DeleteProject = async(projectId:string)=>{
     }catch(e){
         console.log(e);
     }
+}
+
+export const UpdateUserInfo = async(user: Profile, userId:string)=>{
+  try{
+    let res = await axios.put(`http://localhost:8080/api/user/${userId}`,user );
+    return res;
+  }catch(e){
+      console.log(e);
+  }
 }
