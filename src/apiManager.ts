@@ -31,7 +31,7 @@ export const GetProjectsByUserId = async (userId:string) =>{
 export const LoginUser = async(email:string, password:string)=>{
     try{
         let res = await axios
-        .post("http://localhost:8080/api/user/login", {
+        .post(URL + `user/login`, {
         email,
         password,
         });
@@ -64,7 +64,7 @@ export const GetUserInfo = async(userId:string)=>{
 
 export const GetUser = async(token:string)=>{
     try{
-        let res = await axios.get("http://localhost:8080/api/user/me", {
+        let res = await axios.get(URL + `user/me`, {
             headers: {
               'Authorization': `Bearer: ${token}`
             }
@@ -77,7 +77,7 @@ export const GetUser = async(token:string)=>{
 
 export const CreateProject = async(project:ProjectCreate, userId:string)=>{
     try{
-        let res = await axios.post(`http://localhost:8080/api/project/${userId}`,project );
+        let res = await axios.post(URL + `project/${userId}`,project );
         return res;
     }catch(e){
         console.log(e);
@@ -86,7 +86,7 @@ export const CreateProject = async(project:ProjectCreate, userId:string)=>{
 
 export const EditProject = async (project:ProjectCreate, projectId:string)=>{
     try{
-        let res = await axios.put(`http://localhost:8080/api/project/${projectId}`,project );
+        let res = await axios.put(URL + `project/${projectId}`,project );
         return res;
     }catch(e){
         console.log(e);
@@ -95,7 +95,7 @@ export const EditProject = async (project:ProjectCreate, projectId:string)=>{
 
 export const DeleteProject = async(projectId:string)=>{
     try{
-        let res = await axios.delete(`http://localhost:8080/api/project/${projectId}`);
+        let res = await axios.delete(URL + `project/${projectId}`);
         console.log(res);
         return res;
     }catch(e){
@@ -105,7 +105,7 @@ export const DeleteProject = async(projectId:string)=>{
 
 export const UpdateUserInfo = async(user: Profile, userId:string)=>{
   try{
-    let res = await axios.put(`http://localhost:8080/api/user/${userId}`,user );
+    let res = await axios.put(URL + `user/${userId}`,user );
     return res;
   }catch(e){
       console.log(e);
