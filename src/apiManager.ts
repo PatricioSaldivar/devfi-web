@@ -3,8 +3,8 @@ import axios from "axios";
 import { Profile, ProfileCreate, ProjectCreate, User } from "./Types";
 
 let URL: string;
-
-URL = "http://localhost:8080/api/";
+//route
+URL = "https://git.heroku.com/devfi-back.git/api/";
 
 
 export const GetProjects = async () => {
