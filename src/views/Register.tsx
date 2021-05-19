@@ -99,7 +99,7 @@ const Register = () => {
 
   const handleRegister = async () => {
     const res = await axios
-      .post("https://git.heroku.com/devfi-back.git/api/user/register", {
+      .post("https://devfi-back.herokuapp.com/api/user/register", {
         email,
         fullName: name,
         password,
