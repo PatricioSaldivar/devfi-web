@@ -4,7 +4,7 @@ import { Profile, ProfileCreate, ProjectCreate, User } from "./Types";
 
 let URL: string;
 //route
-URL = "https://git.heroku.com/devfi-back.git/api/";
+URL = "https://devfi-back.herokuapp.com/api/";
 
 
 export const GetProjects = async () => {
