@@ -6,6 +6,7 @@ import { RefObject, useContext } from "react";
 import Logo from "../../img/logo.png";
 import { useHistory } from "react-router";
 import { UserContext } from "../../context/UserContextProvider";
+import { useWindowSize } from "use-hooks";
 const MenuWrapper = styled.div`
   .navbar-toggler-icon {
     background-image: url(${Menu});
@@ -36,6 +37,7 @@ const NavbarComponent = (props: NavbarProps) => {
     LogOut();
     history.push("/landing");
   };
+
   const gotoCollab = () => {
     if (props.collabRef.current) {
       props.collabRef.current.scrollIntoView({
@@ -72,35 +74,38 @@ const NavbarComponent = (props: NavbarProps) => {
         </MenuWrapper>
         {!localStorage.getItem("accessToken") && (
           <Navbar.Collapse className="justify-content-center">
-            <Nav className="justify-content-end navbar-right">
-              <Nav.Link
-                style={{
-                  color: "white",
-                  alignSelf: "center",
-                }}
-                onClick={gotoShare}
-              >
-                ¿Por qué Devfi?
-              </Nav.Link>
-              <Nav.Link
-                style={{
-                  color: "white",
-                  alignSelf: "center",
-                }}
-                onClick={gotoCollab}
-              >
-                ¿Cómo funciona?
-              </Nav.Link>
-              <Nav.Link
-                style={{
-                  color: "white",
-                  alignSelf: "center",
-                }}
-                onClick={gotoObject}
-              >
-                Nuestro objetivo
-              </Nav.Link>
-            </Nav>
+            {window.location.pathname !== "/login" &&
+              window.location.pathname !== "/register" && (
+                <Nav className="justify-content-end navbar-right">
+                  <Nav.Link
+                    style={{
+                      color: "white",
+                      alignSelf: "center",
+                    }}
+                    onClick={gotoShare}
+                  >
+                    ¿Por qué Devfi?
+                  </Nav.Link>
+                  <Nav.Link
+                    style={{
+                      color: "white",
+                      alignSelf: "center",
+                    }}
+                    onClick={gotoCollab}
+                  >
+                    ¿Cómo funciona?
+                  </Nav.Link>
+                  <Nav.Link
+                    style={{
+                      color: "white",
+                      alignSelf: "center",
+                    }}
+                    onClick={gotoObject}
+                  >
+                    Nuestro objetivo
+                  </Nav.Link>
+                </Nav>
+              )}
           </Navbar.Collapse>
         )}
         <Navbar.Collapse className="justify-content-end">

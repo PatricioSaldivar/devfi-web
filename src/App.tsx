@@ -21,7 +21,6 @@ export default function App() {
   const shareRef = useRef<HTMLDivElement>(null);
   const collabRef = useRef<HTMLDivElement>(null);
   const objectRef = useRef<HTMLDivElement>(null);
-
   return (
     <div className="App">
       <UserProvider>
