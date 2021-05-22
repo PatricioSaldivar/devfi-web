@@ -18,7 +18,7 @@ import { Row, Col } from "react-bootstrap";
 import { CreateProject, DeleteProject, EditProject } from "../apiManager";
 import { UserContext } from "../context/UserContextProvider";
 import { useProject } from "../hooks/useProject";
-import validator from "validator"
+import validator from "validator";
 
 const Container = styled.div`
   padding: 32px;
@@ -51,7 +51,7 @@ const EditProjectView = () => {
   const [mail, setMail] = useState(project.mail);
   const toast = useToast();
 
-  const validateEmail = (email:string) => {
+  const validateEmail = (email: string) => {
     if (!validator.isEmail(email) && email !== "") {
       toast({
         title: "Email incorrecto.",
@@ -60,7 +60,7 @@ const EditProjectView = () => {
         isClosable: true,
       });
     }
-  }
+  };
 
   useEffect(() => {
     if (project.user != user._id) {
@@ -73,24 +73,38 @@ const EditProjectView = () => {
     }
   }, []);
   const handleEditProject = async () => {
-    if (name != "" && description != "" && colab > 0 && (mail === "" || validator.isEmail(mail))) {
-      let response = await EditProject(
-        {
-          name,
-          description,
-          colab,
-          github,
-          tags,
-          mail
-        },
-        project._id
-      );
-      toast({
-        title: "El projecto fue editado de manera exitosa.",
-        status: "success",
-        duration: 9000,
-        isClosable: true,
-      });
+    if (
+      name !== "" &&
+      description !== "" &&
+      colab > 0 &&
+      (mail === "" || validator.isEmail(mail))
+    ) {
+      if (description.length < 65) {
+        let response = await EditProject(
+          {
+            name,
+            description,
+            colab,
+            github,
+            tags,
+            mail,
+          },
+          project._id
+        );
+        toast({
+          title: "El projecto fue editado de manera exitosa.",
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: "Favor de describir su proyecto en menos de 65 palabras.",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
+      }
     } else {
       toast({
         title: "Favor de llenar los campos.",
@@ -109,7 +123,7 @@ const EditProjectView = () => {
   };
 
   const handleDelete = (t: string) => {
-    let newTags = tags.filter((tg: string) => tg != t);
+    let newTags = tags.filter((tg: string) => tg !== t);
     setTags(newTags);
   };
 
@@ -180,7 +194,9 @@ const EditProjectView = () => {
               style={{ marginBottom: 10 }}
               value={mail}
               onChange={(e) => setMail(e.target.value)}
-              onBlur = {(e) => {validateEmail(e.target.value)}}
+              onBlur={(e) => {
+                validateEmail(e.target.value);
+              }}
             />
           </Col>
           <Col xs={12}>

@@ -68,7 +68,7 @@ const ProfileEdit = () => {
   }, []);
 
   const handleSave = async () => {
-    if (fullName != "") {
+    if (fullName !== "") {
       let response = await UpdateUserInfo(
         {
           fullName,

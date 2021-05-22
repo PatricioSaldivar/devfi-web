@@ -17,7 +17,7 @@ import { useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import { CreateProject } from "../apiManager";
 import { UserContext } from "../context/UserContextProvider";
-import validator from "validator"
+import validator from "validator";
 
 const Container = styled.div`
   padding: 32px;
@@ -44,8 +44,8 @@ const AddProjectView = () => {
   const [tag, setTag] = useState("");
   const [mail, setMail] = useState("");
   const toast = useToast();
-  
-  const validateEmail = (email:string) => {
+
+  const validateEmail = (email: string) => {
     if (!validator.isEmail(email) && email !== "") {
       toast({
         title: "Email incorrecto.",
@@ -54,7 +54,7 @@ const AddProjectView = () => {
         isClosable: true,
       });
     }
-  }
+  };
 
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
@@ -64,31 +64,45 @@ const AddProjectView = () => {
     }
   }, []);
   const handleAddProject = async () => {
-    if (name != "" && description != "" && colab > 0 && (mail === "" || validator.isEmail(mail))) {
-      let response = await CreateProject(
-        {
-          name,
-          description,
-          colab,
-          github,
-          tags,
-          mail,
-        },
-        user._id
-      );
-      toast({
-        title: "El projecto fue creado de manera exitosa.",
-        status: "success",
-        duration: 9000,
-        isClosable: true,
-      });
-      setName("");
-      setDescription("");
-      setColab(0);
-      setGithub("");
-      setTags([]);
-      setTag("");
-      setMail("");
+    if (
+      name !== "" &&
+      description !== "" &&
+      colab > 0 &&
+      (mail === "" || validator.isEmail(mail))
+    ) {
+      if (description.length < 65) {
+        let response = await CreateProject(
+          {
+            name,
+            description,
+            colab,
+            github,
+            tags,
+            mail,
+          },
+          user._id
+        );
+        toast({
+          title: "El projecto fue creado de manera exitosa.",
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+        });
+        setName("");
+        setDescription("");
+        setColab(0);
+        setGithub("");
+        setTags([]);
+        setTag("");
+        setMail("");
+      } else {
+        toast({
+          title: "Favor de describir su proyecto en menos de 65 palabras.",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
+      }
     } else {
       toast({
         title: "Favor de llenar los campos.",
@@ -126,7 +140,7 @@ const AddProjectView = () => {
             />
           </Col>
           <Col xs={12}>
-            <p>Descripcion del proyecto</p>
+            <p>Descripcion del proyecto (max 65)</p>
             <Textarea
               placeholder="Descripcion del proyecto"
               style={{ marginBottom: 10 }}
@@ -163,8 +177,12 @@ const AddProjectView = () => {
               placeholder="ejemplo@mail.com"
               style={{ marginBottom: 10 }}
               value={mail}
-              onChange={(e) => {setMail(e.target.value)}}
-              onBlur = {(e) => {validateEmail(e.target.value)}}
+              onChange={(e) => {
+                setMail(e.target.value);
+              }}
+              onBlur={(e) => {
+                validateEmail(e.target.value);
+              }}
             />
           </Col>
           <Col xs={12}>

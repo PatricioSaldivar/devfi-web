@@ -43,7 +43,6 @@ const ProjectsView = () => {
       console.log("No access token");
     }
   }, []);
-
   return (
     <Container>
       <Button

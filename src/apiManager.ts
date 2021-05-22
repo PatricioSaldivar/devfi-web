@@ -1,6 +1,6 @@
 // This file is used for the different API requests of Convee.
 import axios from "axios";
-import { Profile, ProfileCreate, ProjectCreate, User } from "./Types";
+import { Profile, ProfileCreate, ProjectCreate, User, UserLogin } from "./Types";
 
 let URL: string;
 //route
@@ -39,6 +39,20 @@ export const LoginUser = async(email:string, password:string)=>{
     }catch(e){
         console.log(e);
     }
+}
+
+export const RegisterUser = async(user:UserLogin)=>{
+    try{
+      console.log(user);
+      let res = await axios
+      .post(URL + `user/register`, {
+        user
+      });
+      console.log(res)
+      return res;
+  }catch(e){
+      console.log(e);
+  }
 }
 
 export const GetProjectById = async(projectId:string)=>{

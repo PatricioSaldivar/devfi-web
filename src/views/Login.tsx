@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
 import { Button, TextField } from "@material-ui/core";
 import styled from "styled-components";
-import axios from "axios";
 import { useLocalStorage } from "use-hooks";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
 import { useEffect } from "react";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { UserContext } from "../context/UserContextProvider";
-
+import { useToast } from "@chakra-ui/toast";
+import validator from "validator";
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -46,6 +46,7 @@ const Login = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const { LogIn, accessToken, refreshToken } = useContext(UserContext);
+  const toast = useToast();
   const [accessTokenH, setAccessTokenH] = useLocalStorage<string>(
     "accessToken",
     ""
@@ -101,15 +102,38 @@ const Login = () => {
   };
 
   const handleLogin = async () => {
-    //@ts-ignore
-    let res = await LogIn(email, password);
+    if (email !== "" && password !== "") {
+      if (!validator.isEmail(email) && email !== "") {
+        toast({
+          title: "Ingresar correo valido.",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
+      } else {
+        //@ts-ignore
+        let res = await LogIn(email, password);
 
-    if (res.isValid) {
-      setAccessTokenH(res.accessToken);
-      setRefreshTokenH(res.refreshToken);
-      pushDashboard();
+        if (res.isValid) {
+          setAccessTokenH(res.accessToken);
+          setRefreshTokenH(res.refreshToken);
+          pushDashboard();
+        } else {
+          toast({
+            title: "Error al iniciar sesión, favor de checar sus credenciales.",
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
+        }
+      }
     } else {
-      console.log("Error logging in");
+      toast({
+        title: "Favor de llenar los campos.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
     }
   };
   return (

@@ -40,6 +40,11 @@ export interface User{
     email:string;
     fullName?: string;
 }
+export interface UserLogin{
+    email:string;
+    fullName: string;
+    password:string;
+}
 export interface Profile{
     fullName:string;
     university:string;

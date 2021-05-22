@@ -4,7 +4,7 @@ import { Button, Nav } from "react-bootstrap";
 import { UserContext } from "../context/UserContextProvider";
 import { useProfile } from "../hooks/useProfile";
 import styled from "styled-components";
-import { useHistory } from "react-router";
+import { useHistory, useParams } from "react-router";
 import { profileEnd } from "node:console";
 import { Tag } from "@chakra-ui/tag";
 
@@ -21,10 +21,15 @@ const ProjectTitle = styled.h1`
   font-size: 42px;
   text-align: center;
 `;
-const Profile = () => {
+interface ParamTypes {
+  id: string;
+}
+const ProfileView = () => {
   let history = useHistory();
   const { user } = useContext(UserContext);
-  const { data: profile } = useProfile(user && user._id);
+
+  let { id } = useParams<ParamTypes>();
+  const { data: profile } = useProfile(id);
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
       history.push("/landing");
@@ -33,9 +38,6 @@ const Profile = () => {
   }, []);
   return (
     <Container>
-      <Button onClick={() => history.push(`/profile/edit/${user._id}`)}>
-        Editar perfil
-      </Button>
       <div
         style={{
           display: "flex",
@@ -45,7 +47,7 @@ const Profile = () => {
           textAlign: "center",
         }}
       >
-        <ProjectTitle>Hola, {profile.fullName}</ProjectTitle>
+        <ProjectTitle>{profile.fullName}</ProjectTitle>
         {profile.university !== "" && (
           <div>
             <p style={{ fontWeight: "bold" }}>Universidad:</p>
@@ -90,4 +92,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ProfileView;

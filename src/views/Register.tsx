@@ -8,6 +8,8 @@ import { useHistory } from "react-router-dom";
 import { useEffect } from "react";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { UserContext } from "../context/UserContextProvider";
+import validator from "validator";
+import { useToast } from "@chakra-ui/toast";
 
 const theme = createMuiTheme({
   palette: {
@@ -47,6 +49,7 @@ const Register = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const { accessToken, refreshToken, LogIn } = useContext(UserContext);
+  const toast = useToast();
   const [accessTokenH, setAccessTokenH] = useLocalStorage<string>(
     "accessToken",
     ""
@@ -98,21 +101,39 @@ const Register = () => {
   }
 
   const handleRegister = async () => {
-    const res = await axios
-      .post("https://devfi-back.herokuapp.com/api/user/register", {
-        email,
-        fullName: name,
-        password,
-      })
-      .then((res) => {
-        if (res.status === 200) {
-          handleLogin();
-        }
-      })
-      .catch((err) => {
-        if (err.response.status === 404) console.log("Incorrect email");
-        if (err.response.status === 400) console.log("Incorrect password");
+    if (email !== "" && name !== "" && password !== "") {
+      if (!validator.isEmail(email) && email !== "") {
+        toast({
+          title: "Ingresar correo valido.",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
+      } else {
+        const res = await axios
+          .post("https://devfi-back.herokuapp.com/api/user/register", {
+            email,
+            fullName: name,
+            password,
+          })
+          .then((res) => {
+            if (res.status === 200) {
+              handleLogin();
+            }
+          })
+          .catch((err) => {
+            if (err.response.status === 404) console.log("Incorrect email");
+            if (err.response.status === 400) console.log("Incorrect password");
+          });
+      }
+    } else {
+      toast({
+        title: "Favor de llenar los campos.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
       });
+    }
   };
   const handleLogin = async () => {
     //@ts-ignore
@@ -122,7 +143,12 @@ const Register = () => {
       setRefreshTokenH(res.refreshToken);
       pushDashboard();
     } else {
-      console.log("Error logging in");
+      toast({
+        title: "Error al iniciar sesión, favor de checar sus credenciales.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
     }
   };
   const pushDashboard = () => {

@@ -16,6 +16,7 @@ import AddProjectView from "./views/AddProjectView";
 import EditProjectView from "./views/EditProjectView";
 import Profile from "./views/Profile";
 import ProfileEdit from "./views/ProfileEdit";
+import ProfileView from "./views/ProfileView";
 const queryClient = new QueryClient();
 export default function App() {
   const shareRef = useRef<HTMLDivElement>(null);
@@ -42,6 +43,9 @@ export default function App() {
                   </Route>
                   <Route path="/profile" exact>
                     <Profile />
+                  </Route>
+                  <Route path="/profile/:id" exact>
+                    <ProfileView />
                   </Route>
                   <Route path="/profile/edit/:id">
                     <ProfileEdit />

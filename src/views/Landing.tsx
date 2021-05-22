@@ -91,7 +91,6 @@ interface LandingProps {
 }
 
 const Landing = (props: LandingProps) => {
-
   let history = useHistory();
   return (
     <div>
@@ -145,7 +144,12 @@ const Landing = (props: LandingProps) => {
             Comparte tus proyectos en la plataforma para que los usuarios puedan
             interactuar con tus publicaciones y contactarse contigo.
           </ProductDesctiption>
-          <Button colorScheme="blue" size="md" variant="outline" onClick={() => history.push("/register")} >
+          <Button
+            colorScheme="blue"
+            size="md"
+            variant="outline"
+            onClick={() => history.push("/register")}
+          >
             ¡Pruébalo ya!
           </Button>
         </CustomColContainer>
@@ -171,7 +175,12 @@ const Landing = (props: LandingProps) => {
             Visualiza los diferentes proyectos publicados en Devfi para poder
             ver las diversas oportunidades donde puedas colaborar
           </ProductDesctiption>
-          <Button colorScheme="blue" size="md" variant="outline" onClick={() => history.push("/register")}>
+          <Button
+            colorScheme="blue"
+            size="md"
+            variant="outline"
+            onClick={() => history.push("/register")}
+          >
             ¡Pruébalo ya!
           </Button>
         </CustomColContainer>
@@ -194,8 +203,10 @@ const Landing = (props: LandingProps) => {
             paddingTop: "64px",
           }}
         >
-          Con esta página facilmente podrás encontrar personas que mejor se ajusten a las necesidades desde tu proyecto, tu tienes el poder de poder
-          seleccionar a las personas que mejor se acomoden a tus necesidades sin importar en que parte del mundo esten.
+          Con esta página facilmente podrás encontrar personas que mejor se
+          ajusten a las necesidades desde tu proyecto, tu tienes el poder de
+          poder seleccionar a las personas que mejor se acomoden a tus
+          necesidades sin importar en que parte del mundo esten.
         </Description>
       </DarkContainer>
       <div ref={props.objectRef}></div>
