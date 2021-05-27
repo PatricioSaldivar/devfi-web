@@ -106,6 +106,23 @@ const ProjectView = () => {
             Editar projecto
           </Button>
         )}
+        {project.github && (
+          <div>
+            <Title>Github</Title>
+            <a href={project.github} target="_blank">
+              {project.github}
+            </a>
+          </div>
+        )}
+        {project.mail && (
+          <div>
+            <Title>Correo de contacto</Title>
+            <a href={`mailto:${project.mail}`} target="_blank">
+              {project.mail}
+            </a>
+          </div>
+        )}
+        {console.log(project)}
         <div style={{ marginTop: 35 }}>
           <Title>Compartir en redes sociales:</Title>
           <FacebookShareButton
