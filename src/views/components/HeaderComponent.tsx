@@ -33,6 +33,7 @@ const Title = styled.h1`
 
 interface HeaderProps {
   questionsRef: RefObject<HTMLDivElement>;
+  shareRef: RefObject<HTMLDivElement>;
 }
 const HeaderComponent = (props: HeaderProps) => {
   let history = useHistory();
@@ -43,6 +44,14 @@ const HeaderComponent = (props: HeaderProps) => {
       });
     }
   };
+  const gotoColab = () => {
+    if (props.shareRef.current) {
+      props.shareRef.current.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <div style={{ position: "relative" }}>
       <Container>
@@ -77,7 +86,7 @@ const HeaderComponent = (props: HeaderProps) => {
                 colorScheme="blue"
                 size="md"
                 style={{ marginRight: "10px" }}
-                onClick={() => history.push("/register")}
+                onClick={gotoColab}
               >
                 ¡Pruébalo ya!
               </Button>

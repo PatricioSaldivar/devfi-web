@@ -102,7 +102,10 @@ const Landing = (props: LandingProps) => {
         }}
       >
         {/* Header Component */}
-        <HeaderComponent questionsRef={props.questionsRef} />
+        <HeaderComponent
+          questionsRef={props.questionsRef}
+          shareRef={props.shareRef}
+        />
       </div>
       <div ref={props.shareRef}></div>
 
@@ -146,14 +149,6 @@ const Landing = (props: LandingProps) => {
             Comparte tus proyectos en la plataforma para que los usuarios puedan
             interactuar con tus publicaciones y contactarse contigo.
           </ProductDesctiption>
-          <Button
-            colorScheme="blue"
-            size="md"
-            variant="outline"
-            onClick={() => history.push("/register")}
-          >
-            ¡Pruébalo ya!
-          </Button>
         </CustomColContainer>
         <CustomColContainer
           xs={12}
@@ -177,14 +172,6 @@ const Landing = (props: LandingProps) => {
             Visualiza los diferentes proyectos publicados en Devfi para poder
             ver las diversas oportunidades donde puedas colaborar
           </ProductDesctiption>
-          <Button
-            colorScheme="blue"
-            size="md"
-            variant="outline"
-            onClick={() => history.push("/register")}
-          >
-            ¡Pruébalo ya!
-          </Button>
         </CustomColContainer>
         <Col xs={12} md={6}>
           <ImageContainer>
