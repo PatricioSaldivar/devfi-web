@@ -33,7 +33,7 @@ export default function App() {
               objectRef={objectRef}
             />
             <Router>
-              <div>
+              <div className="content">
                 <Switch>
                   <Route path="/login">
                     <Login />

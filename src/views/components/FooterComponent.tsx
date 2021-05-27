@@ -19,7 +19,7 @@ const FooterContent = styled.p`
 
 const FooterComponent = () => {
   return (
-    <div>
+    <div className="footer">
       <FooterContainer>
         <Container fluid>
           <Row
