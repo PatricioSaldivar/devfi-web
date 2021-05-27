@@ -119,6 +119,13 @@ const EditProjectView = () => {
     if (tag !== "" && !tags.includes(tag)) {
       setTags([...tags, tag]);
       setTag("");
+    } else {
+      toast({
+        title: "Favor de escribir una etiqueta.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
     }
   };
 
@@ -156,9 +163,9 @@ const EditProjectView = () => {
             />
           </Col>
           <Col xs={12}>
-            <p>Descripcion del proyecto</p>
+            <p> Descripción del proyecto</p>
             <Textarea
-              placeholder="Descripcion del proyecto"
+              placeholder="Descripción del proyecto"
               style={{ marginBottom: 10 }}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -174,7 +181,7 @@ const EditProjectView = () => {
             />
           </Col>
           <Col xs={12} md={6}>
-            <p>Numero de colaboradores</p>
+            <p>Número de colaboradores</p>
             <NumberInput
               defaultValue={0}
               value={colab}

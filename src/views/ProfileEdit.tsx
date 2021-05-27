@@ -99,6 +99,13 @@ const ProfileEdit = () => {
     if (language !== "" && !languages.includes(language)) {
       setLanguages([...languages, language]);
       setLanguage("");
+    } else {
+      toast({
+        title: "Favor de escribir algo.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
     }
   };
 
@@ -139,7 +146,7 @@ const ProfileEdit = () => {
             />
           </Col>
           <Col xs={12}>
-            <p>Agregar lenguajes de programacion</p>
+            <p>Agregar lenguajes de programación</p>
           </Col>
 
           <Col xs={12} style={{ display: "flex", flexFlow: "row" }}>

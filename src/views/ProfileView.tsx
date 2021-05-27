@@ -64,7 +64,7 @@ const ProfileView = () => {
 
         {profile.languages && profile.languages.length > 0 && (
           <div>
-            <p style={{ fontWeight: "bold" }}>Lenguajes de programacion: </p>
+            <p style={{ fontWeight: "bold" }}>Lenguajes de programación: </p>
 
             <div
               style={{
