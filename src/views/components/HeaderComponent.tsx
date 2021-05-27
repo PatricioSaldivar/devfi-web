@@ -4,6 +4,7 @@ import { Button } from "@chakra-ui/react";
 import Collaborate from "../../img/collaborate.png";
 import { Navbar, Nav } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import { RefObject } from "react";
 
 const Container = styled.div`
   position: relative;
@@ -30,8 +31,18 @@ const Title = styled.h1`
   font-size: 2.4em;
 `;
 
-const HeaderComponent = () => {
+interface HeaderProps {
+  questionsRef: RefObject<HTMLDivElement>;
+}
+const HeaderComponent = (props: HeaderProps) => {
   let history = useHistory();
+  const gotoQuestions = () => {
+    if (props.questionsRef.current) {
+      props.questionsRef.current.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
+  };
   return (
     <div style={{ position: "relative" }}>
       <Container>
@@ -71,15 +82,14 @@ const HeaderComponent = () => {
                 ¡Pruébalo ya!
               </Button>
               <Nav.Link
-              style={{ color: "white", alignSelf: "center" }}
-              href="/FAQ"
-            >
-              {" "}
-              <Button colorScheme="whiteAlpha" size="md" variant="outline">
-                Preguntas Frecuentes
-              </Button>
-            </Nav.Link>
-              
+                style={{ color: "white", alignSelf: "center" }}
+                onClick={gotoQuestions}
+              >
+                {" "}
+                <Button colorScheme="whiteAlpha" size="md" variant="outline">
+                  Preguntas Frecuentes
+                </Button>
+              </Nav.Link>
             </div>
           </Col>
           <Col xs={12} md={6} style={{ zIndex: 1000 }}>

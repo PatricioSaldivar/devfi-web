@@ -88,10 +88,12 @@ interface LandingProps {
   shareRef: RefObject<HTMLDivElement>;
   collabRef: RefObject<HTMLDivElement>;
   objectRef: RefObject<HTMLDivElement>;
+  questionsRef: RefObject<HTMLDivElement>;
 }
 
 const Landing = (props: LandingProps) => {
   let history = useHistory();
+
   return (
     <div>
       <div
@@ -100,7 +102,7 @@ const Landing = (props: LandingProps) => {
         }}
       >
         {/* Header Component */}
-        <HeaderComponent />
+        <HeaderComponent questionsRef={props.questionsRef} />
       </div>
       <div ref={props.shareRef}></div>
 
@@ -229,6 +231,36 @@ const Landing = (props: LandingProps) => {
           otros desarrolladores con el objetivo de colaborar y elaborar
           proyectos interesantes.
         </Description>
+        <div style={{ padding: 64 }}>
+          <div ref={props.questionsRef}></div>
+          <TitleDark style={{ textAlign: "center", padding: 0 }}>
+            Preguntas frecuentes
+          </TitleDark>
+          <p style={{ color: "#0f1f47", fontWeight: "bold" }}>
+            ¿Cómo Funciona?
+          </p>
+          <td>
+            Tu como usuario puedes decidir si quieres dirigir un trabajo o si
+            quieres formar parte del equipo de otra persona, si decides dirigir
+            un equipo, solo debes de especificar tu idea para proyecto y esperar
+            que personas se postulen a él, si quieres formar parte de algún
+            proyecto solo lo seleccionas y te postulas para el.
+          </td>
+          <p style={{ color: "#0f1f47", fontWeight: "bold" }}>
+            ¿Quiénes se pueden inscribir?
+          </p>
+          <td>
+            Cualquier persona que esté de alta en la plataforma puede formar
+            parte de Devfi.
+          </td>
+          <p style={{ color: "#0f1f47", fontWeight: "bold" }}>
+            ¿Qué necesito para inscribirme a un proyecto?
+          </p>
+          <td>
+            Para inscribirte a un proyecto lo único que se necesita es mandar
+            correo al dueño del proyecto.
+          </td>
+        </div>
       </div>
     </div>
   );

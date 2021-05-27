@@ -2,7 +2,6 @@ import React, { useRef } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Landing from "./views/Landing";
 import Login from "./views/Login";
-import FAQ from "./views/FAQ";
 import { ChakraProvider } from "@chakra-ui/react";
 import NavbarComponent from "./views/components/NavbarComponent";
 import FooterComponent from "./views/components/FooterComponent";
@@ -22,6 +21,7 @@ export default function App() {
   const shareRef = useRef<HTMLDivElement>(null);
   const collabRef = useRef<HTMLDivElement>(null);
   const objectRef = useRef<HTMLDivElement>(null);
+  const questionsRef = useRef<HTMLDivElement>(null);
   return (
     <div className="App">
       <UserProvider>
@@ -37,9 +37,6 @@ export default function App() {
                 <Switch>
                   <Route path="/login">
                     <Login />
-                  </Route>
-                  <Route path="/FAQ">
-                    <FAQ />
                   </Route>
                   <Route path="/profile" exact>
                     <Profile />
@@ -70,6 +67,7 @@ export default function App() {
                       shareRef={shareRef}
                       collabRef={collabRef}
                       objectRef={objectRef}
+                      questionsRef={questionsRef}
                     />
                   </Route>
                   <Route path="/">
