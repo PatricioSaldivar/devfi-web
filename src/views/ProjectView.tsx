@@ -91,12 +91,6 @@ const ProjectView = () => {
           })}
         <Title>Descripción de proyecto</Title>
         <h1>{project.description}</h1>
-        {project.mail && (
-          <h1>
-            Correo de contacto:{" "}
-            <a href={`mailto:${project.mail}`}>{project.mail}</a>
-          </h1>
-        )}
 
         {project.user === user._id && (
           <Button
